@@ -5,16 +5,11 @@
 int main()
 {
 	BST<int> test;
-	test.insert(5);
-	test.insert(7);
-	test.insert(52);
-	test.insert(51);
-	test.insert(45);
-	test.insert(23);
-	test.insert(16);
-	test.insert(11);
-	test.insert(53);
-	test.insert(3);
+	test.insert(34);
+	test.insert(35);
+	test.insert(33);
+	test.insert(34);
+	test.insert(35);
 	std::vector<cg::vertex> vertexVec;
 	std::vector<cg::vertex>::iterator vertexrIt;
 

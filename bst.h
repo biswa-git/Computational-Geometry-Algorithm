@@ -45,24 +45,38 @@ void BST<T>::insert(const T& data)
 		head = new node<T>(data);
 		return;
 	}
+
 	node<T>* present{ head };
 	while (true)
 	{
-		if (present == nullptr)
-		{ 
-			present = new node<T>(data);
-			return;
-		}
-		else
+
+		if (present->data > data)
 		{
-			if (present->data > data)
+			if (present->leftNode == nullptr)
+			{
+				present->leftNode = new node<T>(data);
+				return;
+			}
+			else
 			{
 				present = present->leftNode;
 			}
-			else if(present->data < data)
+		}
+		else if (present->data < data)
+		{
+			if (present->rightNode == nullptr)
+			{
+				present->rightNode = new node<T>(data);
+				return;
+			}
+			else
 			{
 				present = present->rightNode;
 			}
+		}
+		else //(present->data == data)
+		{
+			return;
 		}
 	}
 	

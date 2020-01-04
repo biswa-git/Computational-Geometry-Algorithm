@@ -10,6 +10,10 @@ int main()
 	test.insert(33);
 	test.insert(34);
 	test.insert(35);
+	test.insert(23);
+	test.insert(37);
+	test.insert(38);
+	test.insert(36);
 	std::vector<cg::vertex> vertexVec;
 	std::vector<cg::vertex>::iterator vertexrIt;
 

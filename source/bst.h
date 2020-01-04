@@ -1,6 +1,7 @@
 #include "essential.h"
+
 template<typename T>
-class BST;
+class BST; // PRE-DECLARATION
 template<typename T>
 class node
 {
@@ -18,7 +19,6 @@ private:
 template<typename T>
 class BST
 {
-
 public:
 	BST();
 	~BST();
@@ -40,7 +40,7 @@ BST<T>::~BST()
 template<typename T>
 void BST<T>::insert(const T& data)
 {
-	if (head == nullptr)
+	if (!head)
 	{
 		head = new node<T>(data);
 		return;
@@ -49,7 +49,6 @@ void BST<T>::insert(const T& data)
 	node<T>* present{ head };
 	while (true)
 	{
-
 		if (present->data > data)
 		{
 			if (present->leftNode == nullptr)
@@ -79,5 +78,4 @@ void BST<T>::insert(const T& data)
 			return;
 		}
 	}
-	
 }

@@ -30,7 +30,7 @@ int main()
 	vertexVec.push_back(cg::vertex::New(0, 2));
 
 	vertexVec.push_back(cg::vertex::New(2, 7));
-	vertexVec.emplace_back(cg::vertex::New(6, 1));
+	vertexVec.push_back(cg::vertex::New(6, 1));
 
 	std::vector<cg::edge*> edgeVec;
 	std::vector<cg::edge*>::iterator edgeIt;
@@ -41,8 +41,14 @@ int main()
 		edgeVec.emplace_back(cg::edge::New(vertexVec[2 * i], vertexVec[2 * i + 1]));
 		edgeVec[i]->TopStart();
 	}
+
 	ClearVector<cg::edge*>(edgeVec);
 	ClearVector<cg::vertex*>(vertexVec);
+
+	cg::vertex* v1 = cg::vertex::New(1, 1);
+	cg::vertex* v2 = cg::vertex::New(0, 0);
+	v2 = v1;
+	v2->Print();
 
 	return 0;
 }

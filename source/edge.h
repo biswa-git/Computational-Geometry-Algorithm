@@ -7,12 +7,12 @@ namespace cg
 	{
 	public:
 		static edge* New(vertex*, vertex*);
-		edge(vertex*, vertex*);
 		~edge();
 		void FlipVertex();
 		vector* GetVector() const;
 		void TopStart();
 	private:
+		edge(vertex*, vertex*);
 		vertex* start;
 		vertex* end;
 		vector* halfEdge;

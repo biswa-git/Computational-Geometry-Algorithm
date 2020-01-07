@@ -7,8 +7,6 @@ namespace cg
 	{
 	public:
 		static vertex* New(const double& = 0.0, const double& = 0.0, const double& = 0.0);
-
-		vertex(const double& = 0.0, const double& = 0.0, const double& = 0.0);
 		virtual ~vertex();
 
 		void Reassign(const double& = 0.0, const double& = 0.0, const double& = 0.0);
@@ -20,6 +18,8 @@ namespace cg
 		void Print() const;
 
 	private:
+		vertex(const double& = 0.0, const double& = 0.0, const double& = 0.0);
+
 		static size_t count;
 		size_t id;
 		double xCoord, yCoord, zCoord;

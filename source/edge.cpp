@@ -2,7 +2,10 @@
 
 cg::edge* cg::edge::New(vertex* start, vertex* end)
 {
-	return new edge(start,end);
+	cg::edge* newEdge = new edge(start, end);
+	start->GetAssociatedEdge().push_back(newEdge);
+	end->GetAssociatedEdge().push_back(newEdge);
+	return newEdge;
 }
 
 cg::edge::edge(vertex* start, vertex* end) :start(start), end(end), halfEdge(nullptr)

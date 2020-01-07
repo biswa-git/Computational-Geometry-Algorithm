@@ -1,9 +1,8 @@
 #pragma once
 #include"essential.h"
-
 namespace cg
 {
-
+	class edge;
 	class vertex
 	{
 	public:
@@ -13,15 +12,17 @@ namespace cg
 		virtual ~vertex();
 
 		void Reassign(const double& = 0.0, const double& = 0.0, const double& = 0.0);
-		size_t GetId();
+		size_t GetId() const;
 		double GetXCoord() const;
 		double GetYCoord() const;
 		double GetZCoord() const;
-		void Print();
+		std::vector<edge*>& GetAssociatedEdge();
+		void Print() const;
 
 	private:
 		static size_t count;
 		size_t id;
 		double xCoord, yCoord, zCoord;
+		std::vector<edge*> AssociatedEdge;
 	};
 }

@@ -1,20 +1,21 @@
 #pragma once
 #include "vector.h"
-
+#include "vertex.h"
 namespace cg
 {
 	class edge
 	{
 	public:
-		edge(const vertex&, const vertex&);
+		static edge* New(vertex*, vertex*);
+		edge(vertex*, vertex*);
 		~edge();
 		void FlipVertex();
-		vector GetVector();
+		vector* GetVector() const;
 		void TopStart();
 	private:
-		vertex start;
-		vertex end;
-		vector halfEdge;
+		vertex* start;
+		vertex* end;
+		vector* halfEdge;
 	};
 }
 

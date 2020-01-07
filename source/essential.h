@@ -61,24 +61,12 @@ if(name!=nullptr){ \
 //-----------------------------------------------------------------
 
 
-#define ErrorMacro(x) \
-cout<<"ERROR: "  <<x<<endl<<"       in file: "  <<__FILE__<<endl<<"       at line no: "  <<__LINE__<<endl<<"       in function: "  <<__func__<<endl \
-<<endl<<endl<<"                             EXITING..."<<endl;
-
-
-
-//-----------------------------------------------------------------
-
-
-#define WarningMacro(x) \
-cout<<"WARNING: "<<x<<endl<<"         in file: "<<__FILE__<<endl<<"         at line no: "<<__LINE__<<endl<<"         in function: "<<__func__<<endl;
-
-
-//-----------------------------------------------------------------
-
-
-#define MessageMacro(x) \
-cout<<x<<endl;
-
-
-//-----------------------------------------------------------------
+template<typename T>
+void ClearVector(std::vector<T>& V)
+{
+	for (std::vector<T>::iterator it = V.begin(); it != V.end(); it++)
+	{
+		FreeObjMacro(*it)
+	}
+	V.clear();
+}

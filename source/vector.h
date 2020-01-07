@@ -1,17 +1,15 @@
 #pragma once
 #include "vertex.h"
-
+#include "essential.h"
 namespace cg
 {
 	class vector
 	{
 	public:
 		static vector* New(const double& = 0.0, const double& = 0.0, const double& = 0.0);
-		static vector* New(const vertex&, const vertex&);
 		static vector* New(vertex*, vertex*);
 
 		vector(vertex*, vertex*);
-		vector(const vertex&, const vertex&);
 		vector(const double& = 0.0, const double& = 0.0, const double& = 0.0);
 		virtual ~vector();
 
@@ -19,15 +17,16 @@ namespace cg
 		vector operator-(const vector&);
 		double operator*(const vector&); // DOT PRODUCT
 		double operator^(const vector&); // CROSS PRODUCT
+		double operator*(const vector*) const; // DOT PRODUCT
+		double operator^(const vector*) const; // CROSS PRODUCT
 		double abs();
 
-		double GetDx();
-		double GetDy();
-		double GetDz();
+		double GetDx() const;
+		double GetDy() const;
+		double GetDz() const;
 
 		void Reassign(vertex*, vertex*);
-		void Reassign(const vertex&, const vertex&);
-		void Reassign(double = 0.0, double = 0.0, double = 0.0);
+		void Reassign(const double&, const double&, const double& = 0.0);
 
 		void Print() const;
 

@@ -13,6 +13,7 @@ cg::vertex* cg::vertex::New(const double& x, const double& y, const double& z)
 
 cg::vertex::~vertex()
 {
+	std::cout << "vertex deleted" << std::endl;
 }
 
 void cg::vertex::Reassign(const double& x, const double& y, const double& z)
@@ -22,7 +23,7 @@ void cg::vertex::Reassign(const double& x, const double& y, const double& z)
 	zCoord = z;
 }
 
-size_t cg::vertex::GetId()
+size_t cg::vertex::GetId() const
 {
 	return id;
 }
@@ -42,7 +43,12 @@ double cg::vertex::GetZCoord() const
 	return zCoord;
 }
 
-void cg::vertex::Print()
+std::vector<cg::edge*>& cg::vertex::GetAssociatedEdge()
+{
+	return AssociatedEdge;
+}
+
+void cg::vertex::Print() const
 {
 	std::cout << "id:" << id << " [" << xCoord << "," << yCoord << "," << zCoord << "]" << std::endl;
 }

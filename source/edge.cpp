@@ -1,5 +1,7 @@
 #include "edge.h"
 
+size_t cg::edge::count = 0;
+
 cg::edge* cg::edge::New(vertex* start, vertex* end)
 {
 	cg::edge* newEdge = new edge(start, end);
@@ -8,7 +10,7 @@ cg::edge* cg::edge::New(vertex* start, vertex* end)
 	return newEdge;
 }
 
-cg::edge::edge(vertex* start, vertex* end) :start(start), end(end), halfEdge(nullptr)
+cg::edge::edge(vertex* start, vertex* end) :id(count++), start(start), end(end), halfEdge(nullptr)
 {
 	halfEdge = cg::vector::New(start, end);
 }
@@ -17,7 +19,15 @@ cg::edge::edge(vertex* start, vertex* end) :start(start), end(end), halfEdge(nul
 cg::edge::~edge()
 {
 	FreeObjMacro(halfEdge);
-	std::cout << "edge deleted" << std::endl;
+	//std::cout << "edge deleted" << std::endl;
+}
+
+void cg::edge::operator = (const cg::edge& rValue)
+{
+	start = rValue.start;
+	end = rValue.end;
+	if (halfEdge == nullptr) halfEdge = cg::vector::New(); //cautionary step DeepCopy
+	*halfEdge = *rValue.halfEdge;
 }
 
 void cg::edge::FlipVertex()
@@ -29,6 +39,21 @@ void cg::edge::FlipVertex()
 	{
 		halfEdge->Reassign(-halfEdge->GetDx(), -halfEdge->GetDy());
 	}
+}
+
+size_t cg::edge::GetId()
+{
+	return id;
+}
+
+cg::vertex* cg::edge::GetStart()
+{
+	return start;
+}
+
+cg::vertex* cg::edge::GetEnd()
+{
+	return end;
 }
 
 cg::vector* cg::edge::GetVector() const
@@ -46,4 +71,3 @@ void cg::edge::TopStart()
 	}
 	std::cout << std::endl;
 }
-

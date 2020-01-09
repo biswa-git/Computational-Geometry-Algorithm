@@ -1,19 +1,11 @@
-#include "edge.h"
+#include "sweep_line.h"
 #include "bst.h"
-#define VERT_NUM 6
-#define EDGE_NUM 5
+#define VERT_NUM 8
+#define EDGE_NUM 8
+
+
 int main()
 {
-	BST<int> test;
-	test.insert(34);
-	test.insert(35);
-	test.insert(33);
-	test.insert(34);
-	test.insert(35);
-	test.insert(23);
-	test.insert(37);
-	test.insert(38);
-	test.insert(36);
 	std::vector<cg::vertex*> vertexVec;
 	std::vector<cg::vertex*>::iterator vertexrIt;
 
@@ -22,15 +14,24 @@ int main()
 
 	vertexVec.push_back(cg::vertex::New(7, 7));
 	vertexVec.push_back(cg::vertex::New(0, 5));
-
-	vertexVec.push_back(cg::vertex::New(6, 1));
+	
+	vertexVec.push_back(cg::vertex::New(5, 1));
 	vertexVec.push_back(cg::vertex::New(2, 7));
-
+	
 	vertexVec.push_back(cg::vertex::New(4, 8));
 	vertexVec.push_back(cg::vertex::New(0, 2));
+	
+	vertexVec.push_back(cg::vertex::New(2, 5));
+	vertexVec.push_back(cg::vertex::New(6, 7));
 
-	vertexVec.push_back(cg::vertex::New(2, 7));
-	vertexVec.push_back(cg::vertex::New(6, 1));
+	vertexVec.push_back(cg::vertex::New(3, 4));
+	vertexVec.push_back(cg::vertex::New(9, -1));
+	
+	vertexVec.push_back(cg::vertex::New(14, -3));
+	vertexVec.push_back(cg::vertex::New(5, 2));
+
+	vertexVec.push_back(cg::vertex::New(-2, 9));
+	vertexVec.push_back(cg::vertex::New(4, 7));
 
 	std::vector<cg::edge*> edgeVec;
 	std::vector<cg::edge*>::iterator edgeIt;
@@ -39,16 +40,11 @@ int main()
 	for (size_t i = 0; i < EDGE_NUM; i++)
 	{
 		edgeVec.emplace_back(cg::edge::New(vertexVec[2 * i], vertexVec[2 * i + 1]));
-		edgeVec[i]->TopStart();
 	}
+
+	cg::sweep_line(edgeVec);
 
 	ClearVector<cg::edge*>(edgeVec);
 	ClearVector<cg::vertex*>(vertexVec);
-
-	cg::vertex* v1 = cg::vertex::New(1, 1);
-	cg::vertex* v2 = cg::vertex::New(0, 0);
-	v2 = v1;
-	v2->Print();
-
 	return 0;
 }

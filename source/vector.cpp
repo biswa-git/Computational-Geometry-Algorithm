@@ -9,7 +9,7 @@ cg::vector::vector(vertex* vStart, vertex* vEnd)
 
 cg::vector::vector(const double& dx, const double& dy, const double& dz) :dx(dx), dy(dy), dz(dz)
 {
-	std::cout << "vector created" << std::endl;
+	//std::cout << "vector created" << std::endl;
 }
 
 cg::vector* cg::vector::New(const double& dx, const double& dy, const double& dz)
@@ -24,7 +24,7 @@ cg::vector* cg::vector::New(vertex* vStart, vertex* vEnd)
 
 cg::vector::~vector()
 {
-	std::cout << "vector deleted" << std::endl;
+	//std::cout << "vector deleted" << std::endl;
 }
 
 cg::vector cg::vector::operator+(const vector& V)
@@ -46,16 +46,6 @@ double cg::vector::operator*(const vector& V)
 double cg::vector::operator^(const vector& V)
 {
 	return (this->dx * V.dy - this->dy * V.dx);
-}
-
-double cg::vector::operator*(const vector* V) const
-{
-	return (this->dx * V->dx + this->dy * V->dy + this->dz * V->dz);
-}
-
-double cg::vector::operator^(const vector* V) const
-{
-	return (this->dx * V->dy - this->dy * V->dx);
 }
 
 double cg::vector::abs()

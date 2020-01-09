@@ -1,15 +1,19 @@
 #pragma once
-#include <string>
+
+#include <algorithm>
+#include <cmath>
 #include <fstream>
 #include <iostream>
-#include <cmath>
-#include <vector>
 #include <list>
 #include <map>
-#include <algorithm>
-#include<stdexcept>
+#include <set>
+#include <stdexcept>
+#include <string>
 #include <typeinfo>
-//using namespace std;
+#include <vector>
+
+//-----------------------------------------------------------------
+
 
 #define NewMacro(thisClass)										\
   thisClass* thisClass::New() { STANDARD_NEW_BODY(thisClass); }
@@ -17,6 +21,10 @@
 #define STANDARD_NEW_BODY(thisClass)							\
   thisClass* result = new thisClass;							\
   return result
+
+
+//-----------------------------------------------------------------
+
 
 #define SetMacro(name,type) \
 virtual void Set##name (type _arg) \

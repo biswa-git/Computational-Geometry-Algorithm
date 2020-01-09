@@ -6,6 +6,7 @@ source/main.cpp
 source/edge.cpp
 source/vector.cpp
 source/vertex.cpp
+source/sweep_line.cpp
 )
 
 install(TARGETS CGA DESTINATION ${CMAKE_SOURCE_DIR}/exe)

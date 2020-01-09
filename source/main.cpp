@@ -1,6 +1,6 @@
 #include "sweep_line.h"
 #include "bst.h"
-#define VERT_NUM 8
+//#define VERT_NUM 8
 #define EDGE_NUM 8
 
 

@@ -1,1 +1,1 @@
-.exe file will genarated in this folder
+.exe file will be genarated in this folder

@@ -13,7 +13,7 @@ cg::vertex* cg::vertex::New(const double& x, const double& y, const double& z)
 
 cg::vertex::~vertex()
 {
-	//std::cout << "vertex deleted" << std::endl;
+	//std::cout << "vertex deleted with id: " << id << std::endl;
 }
 
 void cg::vertex::Reassign(const double& x, const double& y, const double& z)

@@ -16,7 +16,7 @@
 //-----------------------------------------------------------------
 
 
-#define NewMacro(thisClass)										\
+#define NEW_MACRO(thisClass)										\
   thisClass* thisClass::New() { STANDARD_NEW_BODY(thisClass); }
 
 #define STANDARD_NEW_BODY(thisClass)							\
@@ -27,7 +27,7 @@
 //-----------------------------------------------------------------
 
 
-#define SetMacro(name,type) \
+#define SET_MACRO(name,type) \
 virtual void Set##name (type _arg) \
 { \
     if (this->name != _arg) \
@@ -50,7 +50,7 @@ virtual type Get##name () \
 //-----------------------------------------------------------------
 
 
-#define FreeObjMacro(name) \
+#define FREE_OBJ_MACRO(name) \
 if(name!=nullptr){  \
     delete name; \
     name = nullptr; \
@@ -60,7 +60,7 @@ if(name!=nullptr){  \
 //-----------------------------------------------------------------
 
 
-#define FreeArrMacro1p(name) \
+#define FREE_ARR_MACRO_1P(name) \
 if(name!=nullptr){ \
     delete[] name; \
     name = nullptr; \

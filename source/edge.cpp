@@ -18,7 +18,7 @@ cg::edge::edge(vertex* start, vertex* end) :id(count++), start(start), end(end),
 
 cg::edge::~edge()
 {
-	FreeObjMacro(halfEdge);
+	FREE_OBJ_MACRO(halfEdge);
 	//std::cout << "edge deleted" << std::endl;
 }
 

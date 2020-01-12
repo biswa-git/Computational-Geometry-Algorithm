@@ -1,7 +1,7 @@
 #include "sweep_line.h"
 #include "convex_hull.h"
 
-#define N 500000
+#define N 500
 #define RMAX 1.0
 #define M_PI 3.14159265358979323846  /* pi */
 #include <ctime>

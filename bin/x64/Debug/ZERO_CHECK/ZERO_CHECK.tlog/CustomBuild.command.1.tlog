@@ -1,0 +1,10 @@
+^D:\PROJ\C++EXPERIMENT\DELAUNEY\NEW\COMPUTATIONAL-GEOMETRY-ALGORITHM\BIN\CMAKEFILES\C433B376A8DEA47FC81C7AC05C2215F3\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Proj/C++EXPERIMENT/Delauney/new/Computational-Geometry-Algorithm -BD:/Proj/C++EXPERIMENT/Delauney/new/Computational-Geometry-Algorithm/bin --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Proj/C++EXPERIMENT/Delauney/new/Computational-Geometry-Algorithm/bin/ComputationalGeometryAlgorithm.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

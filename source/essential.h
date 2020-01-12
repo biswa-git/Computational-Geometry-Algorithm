@@ -75,7 +75,7 @@ void ClearVector(std::vector<T>& V)
 {
 	for (std::vector<T>::iterator it = V.begin(); it != V.end(); it++)
 	{
-		FreeObjMacro(*it)
+		FREE_OBJ_MACRO(*it)
 	}
 	V.clear();
 }

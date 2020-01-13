@@ -22,7 +22,7 @@ int main()
 	//CALLING THE CONVEX HULL FUNCTION
 	//------------------------------------------
 	std::cout << "test" << std::endl;
-	convexHull(V, convexHullVertexList);
+	cg::convexHull(V, convexHullVertexList);
 	//------------------------------------------
 	//PRINTING THE CONVEXHULL VERTICES
 	for (auto it = convexHullVertexList.begin(); it != convexHullVertexList.end(); ++it)

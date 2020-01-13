@@ -2,7 +2,7 @@
 // global data to reduce space complexity while sorting
 cg::vertex* leftMostVertex;
 
-bool compareAngle(cg::vertex* A, cg::vertex* B)
+bool cg::compareAngle(cg::vertex* A, cg::vertex* B)
 {
 	cg::vector vectorA(leftMostVertex, A);
 	double leftMostVertex_to_A = asin((vectorA.GetDy()) / vectorA.Abs());
@@ -18,7 +18,7 @@ bool compareAngle(cg::vertex* A, cg::vertex* B)
 	return false;
 }
 
-void convexHull(std::vector<cg::vertex*>& V, std::list<cg::vertex*>& convexHullVertexList)
+void cg::convexHull(std::vector<cg::vertex*>& V, std::list<cg::vertex*>& convexHullVertexList)
 {
 	//cg::vertex* firstVertex = nullptr;
 	{

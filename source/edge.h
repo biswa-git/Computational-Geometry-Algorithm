@@ -8,7 +8,8 @@ namespace cg
 	public:
 		static edge* New(vertex*, vertex*);
 		~edge();
-		void operator=(const edge&) = delete;
+		edge(edge const&) = delete;
+		edge& operator=(edge const&) = delete;
 		void FlipVertex();
 		size_t GetId();
 		vertex* GetStart();

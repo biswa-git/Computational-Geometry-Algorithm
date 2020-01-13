@@ -8,6 +8,8 @@ namespace cg
 	public:
 		static vertex* New(const double& = 0.0, const double& = 0.0, const double& = 0.0);
 		virtual ~vertex();
+		vertex(vertex const&) = delete;
+		vertex& operator=(vertex const&) = delete;
 
 		void Reassign(const double& = 0.0, const double& = 0.0, const double& = 0.0);
 		size_t GetId() const;

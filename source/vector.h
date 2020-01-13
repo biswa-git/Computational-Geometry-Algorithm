@@ -17,7 +17,7 @@ namespace cg
 		vector operator-(const vector&);
 		double operator*(const vector&); // DOT PRODUCT
 		double operator^(const vector&); // CROSS PRODUCT
-		double abs();
+		double Abs();
 
 		double GetDx() const;
 		double GetDy() const;

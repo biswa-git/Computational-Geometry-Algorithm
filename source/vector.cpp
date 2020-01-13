@@ -48,7 +48,7 @@ double cg::vector::operator^(const vector& V)
 	return (this->dx * V.dy - this->dy * V.dx);
 }
 
-double cg::vector::abs()
+double cg::vector::Abs()
 {
 	return sqrt(dx * dx + dy * dy + dz * dz);
 }

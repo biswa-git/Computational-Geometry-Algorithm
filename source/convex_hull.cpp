@@ -5,16 +5,16 @@ cg::vertex* leftMostVertex;
 bool compareAngle(cg::vertex* A, cg::vertex* B)
 {
 	cg::vector vectorA(leftMostVertex, A);
-	double leftMostVertex_to_A = asin((vectorA.GetDy()) / vectorA.abs());
+	double leftMostVertex_to_A = asin((vectorA.GetDy()) / vectorA.Abs());
 	cg::vector vectorB(leftMostVertex, B);
-	double leftMostVertex_to_B = asin((vectorB.GetDy()) / vectorB.abs());
+	double leftMostVertex_to_B = asin((vectorB.GetDy()) / vectorB.Abs());
 
 	//this step ensure the leftmost vertex remain in the first position
 	if (A == leftMostVertex) leftMostVertex_to_A = -2.0;
 	if (B == leftMostVertex) leftMostVertex_to_B = -2.0;
 
 	return leftMostVertex_to_A < leftMostVertex_to_B;
-	if (leftMostVertex_to_A == leftMostVertex_to_B) return vectorA.abs() < vectorB.abs();
+	if (leftMostVertex_to_A == leftMostVertex_to_B) return vectorA.Abs() < vectorB.Abs();
 	return false;
 }
 

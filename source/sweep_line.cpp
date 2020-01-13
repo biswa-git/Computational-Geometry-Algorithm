@@ -2,7 +2,7 @@
 
 bool cg::CustomVertexEdgePairComparator(const std::pair<cg::vertex*, cg::edge*>& pair1, const std::pair<cg::vertex*, cg::edge*>& pair2)
 {
-	if (pair1.first->GetYCoord() == pair2.first->GetYCoord()) return (pair1.first->GetXCoord() > pair2.first->GetXCoord());
+	if (pair1.first->GetYCoord() == pair2.first->GetYCoord()) return (pair1.first->GetXCoord() < pair2.first->GetXCoord());
 	else return (pair1.first->GetYCoord() > pair2.first->GetYCoord());
 }
 

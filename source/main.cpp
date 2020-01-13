@@ -21,7 +21,6 @@ int main()
 	std::list<cg::vertex*> convexHullVertexList; // LIST TO STORE POINTER TO CONVEX HULL VERTEX
 	//CALLING THE CONVEX HULL FUNCTION
 	//------------------------------------------
-	std::cout << "test" << std::endl;
 	cg::convexHull(V, convexHullVertexList);
 	//------------------------------------------
 	//PRINTING THE CONVEXHULL VERTICES

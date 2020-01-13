@@ -1,8 +1,26 @@
 #include "convex_hull.h"
+// global data to reduce space complexity while sorting
+cg::vertex* leftMostVertex;
+
+bool compareAngle(cg::vertex* A, cg::vertex* B)
+{
+	cg::vector vectorA(leftMostVertex, A);
+	double leftMostVertex_to_A = asin((vectorA.GetDy()) / vectorA.abs());
+	cg::vector vectorB(leftMostVertex, B);
+	double leftMostVertex_to_B = asin((vectorB.GetDy()) / vectorB.abs());
+
+	//this step ensure the leftmost vertex remain in the first position
+	if (A == leftMostVertex) leftMostVertex_to_A = -2.0;
+	if (B == leftMostVertex) leftMostVertex_to_B = -2.0;
+
+	return leftMostVertex_to_A < leftMostVertex_to_B;
+	if (leftMostVertex_to_A == leftMostVertex_to_B) return vectorA.abs() < vectorB.abs();
+	return false;
+}
 
 void convexHull(std::vector<cg::vertex*>& V, std::list<cg::vertex*>& convexHullVertexList)
 {
-	cg::vertex* firstVertex = nullptr;
+	//cg::vertex* firstVertex = nullptr;
 	{
 		//FINDING THE LEFTMOST POINTS ID  O(n)
 		double leftPos = (*V.begin())->GetXCoord();
@@ -11,29 +29,12 @@ void convexHull(std::vector<cg::vertex*>& V, std::list<cg::vertex*>& convexHullV
 			if ((*it)->GetXCoord() < leftPos)
 			{
 				leftPos = (*it)->GetXCoord();
-				firstVertex = (*it);
+				leftMostVertex = (*it);
 			}
 		}
 	}
 
-	//SORTING THE POINTS IN COUNTERCLOCKWISE DIR
-	std::set<std::pair<double, cg::vertex*>> angleVertexPair;
-	for (auto it = V.begin(); it != V.end(); it++)
-	{
-			cg::vector vec(firstVertex, *it);
-			double angleWithLeftMostVertex = asin((vec.GetDy()) / vec.abs());
-			if (*it == firstVertex) angleWithLeftMostVertex = -2.0;
-			angleVertexPair.emplace(angleWithLeftMostVertex, *it);
-	}
-	//V.clear();
-	auto VecIter = V.begin();
-	for (auto it = angleVertexPair.begin(); it != angleVertexPair.end(); ++it)
-	{
-		*VecIter = it->second;
-		++VecIter;
-	}
-	angleVertexPair.clear();
-
+	std::sort(V.begin(), V.end(), compareAngle);
 	/*-----------------------------------------------------
 		WE NEED TO ADD FEW ADDITIONAL CHECKS FOR CORNER 
 		CASES. WHICH I WILL ADD LATER :)
@@ -49,18 +50,11 @@ void convexHull(std::vector<cg::vertex*>& V, std::list<cg::vertex*>& convexHullV
 		while(contd)
 		{
 			//GETTINT THE POINTER OF PAST, PRES, NEXT VERTEX
-			cg::vertex* present = convexHullVertexList.back();
-			convexHullVertexList.pop_back();
-			cg::vertex* prev = convexHullVertexList.back();
-			convexHullVertexList.pop_back();
-			cg::vertex* next = *it;
-
-			//FORMING EDGE IN THE FORM OF VECTOR
-			cg::vector firstEdge(prev, present);
-			cg::vector secondEdge(present, next);
+			cg::vertex* present = convexHullVertexList.back(); convexHullVertexList.pop_back();
+			cg::vertex* prev    = *convexHullVertexList.rbegin();
+			cg::vertex* next    = *it;
 			
-			convexHullVertexList.push_back(prev);
-			if ((firstEdge ^ secondEdge) > 0.0) // ^ IS OVERLOADED TO PERFORM CROSS PRODUCT
+			if (cg::CrossProductByVertex2D(prev,present,next) > 0.0) // ^ IS OVERLOADED TO PERFORM CROSS PRODUCT
 			{
 				convexHullVertexList.push_back(present);
 				contd = false;

@@ -26,6 +26,7 @@ void cg::sweep_line(std::vector<cg::edge*>& edgeVec)
 		}
 		else
 		{
+			double crossProd[4];
 			for (auto edgeSetIt = edgeset.begin(); edgeSetIt != edgeset.end(); edgeSetIt++)
 			{
 				cg::vertex* latestEdgeStartVertex = it->second->GetStart();
@@ -33,16 +34,13 @@ void cg::sweep_line(std::vector<cg::edge*>& edgeVec)
 				cg::vertex* edgeSetItStartVertex = (*edgeSetIt)->GetStart();
 				cg::vertex* edgeSetItEndVertex = (*edgeSetIt)->GetEnd();
 
-				cg::vector latestEdgeVector = *(it->second->GetVector());
-				cg::vector vecToStartFromlatestEdgeVector(latestEdgeEndVertex, edgeSetItStartVertex);
-				cg::vector vecToEndFromlatestEdgeVector(latestEdgeEndVertex, edgeSetItEndVertex);
+				crossProd[0] = cg::CrossProductByVertex2D(latestEdgeStartVertex, latestEdgeEndVertex, edgeSetItStartVertex);
+				crossProd[1] = cg::CrossProductByVertex2D(latestEdgeStartVertex, latestEdgeEndVertex, edgeSetItEndVertex);
 
-				cg::vector latestedgeSetIt = *((*edgeSetIt)->GetVector());
-				cg::vector vecToStartFromlatestedgeSetIt(edgeSetItEndVertex, latestEdgeStartVertex);
-				cg::vector vecToEndFromlatestedgeSetIt(edgeSetItEndVertex, latestEdgeEndVertex);
+				crossProd[2] = cg::CrossProductByVertex2D(edgeSetItStartVertex, edgeSetItEndVertex, latestEdgeStartVertex);
+				crossProd[3] = cg::CrossProductByVertex2D(edgeSetItStartVertex, edgeSetItEndVertex, latestEdgeEndVertex);
 
-				if ((latestEdgeVector ^ vecToStartFromlatestEdgeVector) * (latestEdgeVector ^ vecToEndFromlatestEdgeVector) <= 0 &&
-					(latestedgeSetIt ^ vecToStartFromlatestedgeSetIt) * (latestedgeSetIt ^ vecToEndFromlatestedgeSetIt) <= 0)
+				if (crossProd[0] * crossProd[1] <= 0 && crossProd[2] * crossProd[3] <= 0)
 				{
 					std::cout << "intersection detected! between " << it->second->GetId() << " and " << (*edgeSetIt)->GetId() << std::endl;
 				}

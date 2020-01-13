@@ -43,7 +43,7 @@ double cg::vertex::GetZCoord() const
 	return zCoord;
 }
 
-std::vector<cg::edge*>& cg::vertex::GetAssociatedEdge()
+std::list<cg::edge*>& cg::vertex::GetAssociatedEdge()
 {
 	return AssociatedEdge;
 }
@@ -51,4 +51,10 @@ std::vector<cg::edge*>& cg::vertex::GetAssociatedEdge()
 void cg::vertex::Print() const
 {
 	std::cout << "id:" << id << " [" << xCoord << "," << yCoord << "," << zCoord << "]" << std::endl;
+}
+
+double cg::CrossProductByVertex2D(vertex* A, vertex* B, vertex* C)
+{
+	return (B->GetXCoord() - A->GetXCoord()) * (C->GetYCoord() - B->GetYCoord()) -
+		   (B->GetYCoord() - A->GetYCoord()) * (C->GetXCoord() - B->GetXCoord());
 }

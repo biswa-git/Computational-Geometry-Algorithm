@@ -10,24 +10,20 @@ cg::edge* cg::edge::New(vertex* start, vertex* end)
 	return newEdge;
 }
 
-cg::edge::edge(vertex* start, vertex* end) :id(count++), start(start), end(end), halfEdge(nullptr)
+cg::edge::edge(vertex* start, vertex* end) :id(count++), start(start), end(end)
 {
-	halfEdge = cg::vector::New(start, end);
+}
+
+cg::vector cg::edge::GetEdgeVector()
+{
+	return vector(start,end);
 }
 
 
 cg::edge::~edge()
 {
-	FREE_OBJ_MACRO(halfEdge);
+	//FREE_OBJ_MACRO(halfEdge);
 	//std::cout << "edge deleted" << std::endl;
-}
-
-void cg::edge::operator = (const cg::edge& rValue)
-{
-	start = rValue.start;
-	end = rValue.end;
-	if (halfEdge == nullptr) halfEdge = cg::vector::New(); //cautionary step DeepCopy
-	*halfEdge = *rValue.halfEdge;
 }
 
 void cg::edge::FlipVertex()
@@ -35,10 +31,6 @@ void cg::edge::FlipVertex()
 	vertex* temp = start;
 	start = end;
 	end = temp;
-	if (halfEdge != nullptr)
-	{
-		halfEdge->Reassign(-halfEdge->GetDx(), -halfEdge->GetDy());
-	}
 }
 
 size_t cg::edge::GetId()
@@ -54,11 +46,6 @@ cg::vertex* cg::edge::GetStart()
 cg::vertex* cg::edge::GetEnd()
 {
 	return end;
-}
-
-cg::vector* cg::edge::GetVector() const
-{
-	return halfEdge;
 }
 
 void cg::edge::TopStart()

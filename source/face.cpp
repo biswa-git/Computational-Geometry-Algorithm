@@ -51,7 +51,7 @@ cg::tri_face::tri_face(vertex* A, vertex* B, vertex* C) :halfEdge{ nullptr, null
 	vertex* tempVertexArray[3]{ A,B,C };
 	edge* triEdge[3]{ nullptr,nullptr,nullptr };
 
-	//CHECKING WHETHER EDGE EXIST BETWEEN VERTEX 0 AND 1
+	//CHECKING WHETHER EDGE EXIST BETWEEN VERTEX
 	for (size_t i = 0; i < 3; i++)
 	{
 		auto edgeList = tempVertexArray[i]->GetAssociatedEdge();

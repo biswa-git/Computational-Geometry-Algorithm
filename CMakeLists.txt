@@ -5,6 +5,7 @@ add_executable(CGA
 source/main.cpp
 source/convex_hull.cpp
 source/edge.cpp
+source/face.cpp
 source/sweep_line.cpp
 source/vector.cpp
 source/vertex.cpp

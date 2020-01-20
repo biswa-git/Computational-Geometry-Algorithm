@@ -16,7 +16,7 @@ namespace cg
 		double GetXCoord() const;
 		double GetYCoord() const;
 		double GetZCoord() const;
-		std::list<edge*>& GetAssociatedEdge();
+		std::set<edge*>& GetAssociatedEdge();
 		void Print() const;
 
 	private:
@@ -25,7 +25,7 @@ namespace cg
 		static size_t count;
 		size_t id;
 		double xCoord, yCoord, zCoord;
-		std::list<edge*> AssociatedEdge;
+		std::set<edge*> AssociatedEdge;
 	};
 
 	double CrossProductByVertex2D(vertex*, vertex*, vertex*);

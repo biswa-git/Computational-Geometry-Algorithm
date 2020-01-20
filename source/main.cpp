@@ -1,5 +1,6 @@
 #include "sweep_line.h"
 #include "convex_hull.h"
+#include "face.h"
 
 #define N 500
 #define RMAX 1.0
@@ -7,6 +8,7 @@
 #include <ctime>
 int main()
 {
+	/*
 	//------------------------------EXAMPLE 1 (Graham Scan convex hull)
 	//CREATING VERTICES AND ASSIGNING RANDOM VALUE
 	std::vector<cg::vertex*>V;
@@ -84,6 +86,27 @@ int main()
 		FREE_OBJ_MACRO(vertEnd);
 		FREE_OBJ_MACRO(*it);
 	}
+	*/
+	cg::vertex* v[6];
+
+	v[0] = cg::vertex::New(0 , 0 );
+	v[1] = cg::vertex::New(10, 0 );
+	v[2] = cg::vertex::New(0 , 5 );
+	v[3] = cg::vertex::New(0 ,-10);
+	v[4] = cg::vertex::New(10, -8);
+	v[5] = cg::vertex::New(-5, -5);
+
+	cg::face* tf1 = cg::tri_face::New(v[0], v[1], v[2]);
+	cg::face* tf2 = cg::tri_face::New(v[0], v[1], v[3]);
+	cg::face* tf3 = cg::tri_face::New(v[1], v[4], v[3]);
+	cg::face* tf4 = cg::tri_face::New(v[0], v[3], v[5]);
+	std::cout << tf1->GetArea() << std::endl;
+	std::cout << tf2->GetArea() << std::endl;
+
+	delete tf3;
+	delete tf1;
+	tf2 = nullptr;
+
 	system("pause");
 	return 0;
 }

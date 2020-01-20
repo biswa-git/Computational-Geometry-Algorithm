@@ -43,7 +43,7 @@ double cg::vertex::GetZCoord() const
 	return zCoord;
 }
 
-std::list<cg::edge*>& cg::vertex::GetAssociatedEdge()
+std::set<cg::edge*>& cg::vertex::GetAssociatedEdge()
 {
 	return AssociatedEdge;
 }

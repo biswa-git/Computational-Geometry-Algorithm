@@ -52,47 +52,19 @@ cg::tri_face::tri_face(vertex* A, vertex* B, vertex* C) :halfEdge{ nullptr, null
 	edge* triEdge[3]{ nullptr,nullptr,nullptr };
 
 	//CHECKING WHETHER EDGE EXIST BETWEEN VERTEX 0 AND 1
+	for (size_t i = 0; i < 3; i++)
 	{
-		auto edgeList = tempVertexArray[0]->GetAssociatedEdge();
+		auto edgeList = tempVertexArray[i]->GetAssociatedEdge();
 		for (auto it = edgeList.begin(); it != edgeList.end(); it++)
 		{
 			auto associatedEdge = *it;
-			if (associatedEdge->GetEnd() == tempVertexArray[1]  || associatedEdge->GetStart() == tempVertexArray[1])
+			if (associatedEdge->GetEnd() == tempVertexArray[(i + 1) % 3] || associatedEdge->GetStart() == tempVertexArray[(i + 1) % 3])
 			{
-				triEdge[0] = associatedEdge;
+				triEdge[i] = associatedEdge;
 				break;
 			}
 		}
-		if (triEdge[0] == nullptr) triEdge[0] = edge::New(tempVertexArray[0], tempVertexArray[1]);
-	}
-	//CHECKING WHETHER EDGE EXIST BETWEEN VERTEX 1 AND 2
-	{
-		auto edgeList = tempVertexArray[1]->GetAssociatedEdge();
-		for (auto it = edgeList.begin(); it != edgeList.end(); it++)
-		{
-			auto associatedEdge = *it;
-			if (associatedEdge->GetEnd() == tempVertexArray[2] || associatedEdge->GetStart() == tempVertexArray[2])
-			{
-				triEdge[1] = associatedEdge;
-				break;
-			}
-		}
-		if (triEdge[1] == nullptr) triEdge[1] = edge::New(tempVertexArray[1], tempVertexArray[2]);
-	}
-
-	//CHECKING WHETHER EDGE EXIST BETWEEN VERTEX 2 AND 0
-	{
-		auto edgeList = tempVertexArray[2]->GetAssociatedEdge();
-		for (auto it = edgeList.begin(); it != edgeList.end(); it++)
-		{
-			auto associatedEdge = *it;
-			if (associatedEdge->GetEnd() == tempVertexArray[0] || associatedEdge->GetStart() == tempVertexArray[0])
-			{
-				triEdge[2] = associatedEdge;
-				break;
-			}
-		}
-		if (triEdge[2] == nullptr) triEdge[2] = edge::New(tempVertexArray[2], tempVertexArray[0]);
+		if (triEdge[i] == nullptr) triEdge[i] = edge::New(tempVertexArray[i], tempVertexArray[(i + 1) % 3]);
 	}
 
 	for (size_t i = 0; i < 3; i++)

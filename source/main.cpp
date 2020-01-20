@@ -103,9 +103,6 @@ int main()
 	std::cout << tf1->GetArea() << std::endl;
 	std::cout << tf2->GetArea() << std::endl;
 
-	delete tf3;
-	delete tf1;
-	tf2 = nullptr;
 
 	system("pause");
 	return 0;

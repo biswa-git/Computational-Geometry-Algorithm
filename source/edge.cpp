@@ -69,18 +69,18 @@ void cg::edge::Legalize(edge* E)
 		face* face[2]{ tempHalfEdge[0]->GetFace(),tempHalfEdge[1]->GetFace() };
 		if (face[0] != nullptr && face[1] != nullptr)
 		{
-			/*
-			            B
-			            /\
-			           /  \
-			          /    \
-			         /--->--\		
-				   C \--<---/ A
-					  \    /
-					   \  /
-					    \/
-			            D
-			*/
+            /*------------------------------------------
+                           B
+                           /\
+                          /  \
+                         /    \
+                        /--->--\		
+                        \--<---/ A
+                         \    /
+                          \  /
+                           \/
+                           D
+            --------------------------------------------*/
 			//NOW WE TEST WHTHER THE EDGE IS LEGAL OR NOT
 			vertex* A = tempHalfEdge[0]->GetEnd();
 			vertex* B = tempHalfEdge[0]->GetNext()->GetEnd();

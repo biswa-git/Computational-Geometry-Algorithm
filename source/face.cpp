@@ -24,7 +24,7 @@ cg::tri_face::~tri_face()
 		halfEdge[i]->SetFace(nullptr);
 		if (parentEdge->GetHalfEdge(0)->GetFace() == nullptr && parentEdge->GetHalfEdge(1)->GetFace() == nullptr)
 		{	
-			//DELETE THE EDGE IF IT IS ORPHANED. i.e. NO ASSOCIATED FACES.
+			//DELETE THE EDGE IF IT IS ORPHANED. i.e. NO ASSOCIATED WITH ANY FACE/FACES.
 			delete parentEdge;
 		}
 	}

@@ -1,5 +1,4 @@
 #include "edge.h"
-
 size_t cg::edge::count = 0;
 
 cg::edge* cg::edge::New(vertex* start, vertex* end)
@@ -56,6 +55,60 @@ cg::vector cg::edge::GetVector()
 cg::half_edge* cg::edge::GetHalfEdge(const size_t& index)
 {
 	return halfEdge[index];
+}
+
+void cg::edge::Legalize(edge* E)
+{
+	//THIS ROUTINE RECURSIVELY FLIP & LEGALIZE THE DELAUNEY TRIANGLE
+	std::queue<edge*> edgeQueue;
+	edgeQueue.push(E);
+	while (edgeQueue.size() != 0)
+	{
+		edge* tempEdge = edgeQueue.back(); edgeQueue.pop();
+		half_edge* tempHalfEdge[2]{ tempEdge->GetHalfEdge(0),tempEdge->GetHalfEdge(1) };
+		face* face[2]{ tempHalfEdge[0]->GetFace(),tempHalfEdge[1]->GetFace() };
+		if (face[0] != nullptr && face[1] != nullptr)
+		{
+			/*
+			            B
+			            /\
+			           /  \
+			          /    \
+			         /--->--\		
+				   C \--<---/ A
+					  \    /
+					   \  /
+					    \/
+			            D
+			*/
+			//NOW WE TEST WHTHER THE EDGE IS LEGAL OR NOT
+			vertex* A = tempHalfEdge[0]->GetEnd();
+			vertex* B = tempHalfEdge[0]->GetNext()->GetEnd();
+			vertex* C = tempHalfEdge[0]->GetStart();
+			vertex* D = tempHalfEdge[1]->GetNext()->GetEnd();
+		
+			double ADx = A->GetXCoord() - D->GetXCoord();
+			double BDx = B->GetXCoord() - D->GetXCoord();
+			double CDx = C->GetXCoord() - D->GetXCoord();
+			double ADy = A->GetYCoord() - D->GetYCoord();
+			double BDy = B->GetYCoord() - D->GetYCoord();
+			double CDy = C->GetYCoord() - D->GetYCoord();
+			
+			double M[3][3]
+			{
+				{ADx, ADy, ADx * ADx + ADy * ADy},
+				{BDx, BDy, BDx * BDx + BDy * BDy},
+				{CDx, CDy, CDx * CDx + CDy * CDy}
+			};
+
+			double det = cg::math::det(M);
+			if (det > 0.0)
+			{
+				//FLIP EDGE AND LEGALISE OTHER EDGES 
+				std::cout << "EDGE FLIP NEED TO BE PERFORMED" << std::endl;
+			}
+		}
+	}
 }
 
 cg::half_edge* cg::half_edge::New(edge* E, vertex* V)

@@ -2,6 +2,7 @@
 #include "vector.h"
 #include "vertex.h"
 #include "face.h"
+#include "math.h"
 namespace cg
 {
 	class half_edge;
@@ -20,7 +21,7 @@ namespace cg
 		vertex* GetEnd();
 		vector GetVector();
 		half_edge* GetHalfEdge(const size_t&);
-
+		static void Legalize(edge*);
 	private:
 		edge(vertex*, vertex*);
 

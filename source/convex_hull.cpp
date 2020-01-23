@@ -13,14 +13,12 @@ bool cg::compareAngle(cg::vertex* A, cg::vertex* B)
 	if (A == leftMostVertex) leftMostVertex_to_A = -2.0;
 	if (B == leftMostVertex) leftMostVertex_to_B = -2.0;
 
-	return leftMostVertex_to_A < leftMostVertex_to_B;
 	if (leftMostVertex_to_A == leftMostVertex_to_B) return vectorA.Abs() < vectorB.Abs();
-	return false;
+	return leftMostVertex_to_A < leftMostVertex_to_B;
 }
 
 void cg::convexHull(std::vector<cg::vertex*>& V, std::list<cg::vertex*>& convexHullVertexList)
 {
-	//cg::vertex* firstVertex = nullptr;
 	{
 		//FINDING THE LEFTMOST POINTS ID  O(n)
 		double leftPos = (*V.begin())->GetXCoord();
@@ -36,7 +34,7 @@ void cg::convexHull(std::vector<cg::vertex*>& V, std::list<cg::vertex*>& convexH
 
 	std::sort(V.begin(), V.end(), compareAngle);
 	/*-----------------------------------------------------
-		WE NEED TO ADD FEW ADDITIONAL CHECKS FOR CORNER 
+		HERE WE NEED TO ADD FEW ADDITIONAL CHECKS FOR CORNER 
 		CASES. WHICH I WILL ADD LATER :)
 	-----------------------------------------------------*/
 

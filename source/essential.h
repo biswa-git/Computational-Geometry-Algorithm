@@ -7,6 +7,7 @@
 #include <iostream>
 #include <list>
 #include <map>
+#include <queue>
 #include <set>
 #include <stdexcept>
 #include <string>

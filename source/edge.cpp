@@ -75,7 +75,7 @@ void cg::edge::Legalize(edge* E)
                           /  \
                          /    \
                         /--->--\		
-                        \--<---/ A
+                      C \--<---/ A
                          \    /
                           \  /
                            \/

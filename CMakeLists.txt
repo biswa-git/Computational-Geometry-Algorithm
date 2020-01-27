@@ -6,6 +6,7 @@ source/main.cpp
 source/convex_hull.cpp
 source/edge.cpp
 source/face.cpp
+source/face_node.cpp
 source/math.cpp
 source/sweep_line.cpp
 source/vector.cpp

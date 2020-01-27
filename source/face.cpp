@@ -2,12 +2,17 @@
 
 size_t cg::face::count = 0;
 
-cg::face::face() :area(0.0)
+cg::face::face() :area(0.0), isOrphanedEdgeRemoveFlag{ true }
 {
 }
 
 cg::face::~face()
 {
+}
+
+void cg::face::SetOrphanedEdgeRemoveFlag(bool status)
+{
+	isOrphanedEdgeRemoveFlag = status;
 }
 
 cg::tri_face* cg::tri_face::New(vertex* A, vertex* B, vertex* C)
@@ -22,7 +27,7 @@ cg::tri_face::~tri_face()
 		auto parentEdge = halfEdge[i]->GetParentEdge();
 		halfEdge[i]->SetNext(nullptr);
 		halfEdge[i]->SetFace(nullptr);
-		if (parentEdge->GetHalfEdge(0)->GetFace() == nullptr && parentEdge->GetHalfEdge(1)->GetFace() == nullptr)
+		if (isOrphanedEdgeRemoveFlag && parentEdge->GetHalfEdge(0)->GetFace() == nullptr && parentEdge->GetHalfEdge(1)->GetFace() == nullptr)
 		{	
 			//DELETE THE EDGE IF IT IS ORPHANED. i.e. NO ASSOCIATED WITH ANY FACE/FACES.
 			delete parentEdge;
@@ -35,8 +40,9 @@ double cg::tri_face::GetArea()
 	return area;
 }
 
-cg::tri_face::tri_face(vertex* A, vertex* B, vertex* C) :halfEdge{ nullptr, nullptr, nullptr }
+cg::tri_face::tri_face(vertex* A, vertex* B, vertex* C)
 {
+	halfEdge.resize(3, nullptr);
 	//IF IT IS COLINEAR THEN IT IS NOT A VALID SURFACE. WE NEED TO STOP THAT.
 	auto lhs = (A->GetYCoord() - B->GetYCoord()) / (A->GetXCoord() - B->GetXCoord());
 	auto rhs = (A->GetYCoord() - C->GetYCoord()) / (A->GetXCoord() - C->GetXCoord());
@@ -103,4 +109,19 @@ void cg::tri_face::CalculateArea()
 	vector firstEdgeVector(halfEdge[0]->GetStart(), halfEdge[0]->GetEnd());
 	vector secondEdgeVector(halfEdge[1]->GetStart(), halfEdge[1]->GetEnd());
 	area = 0.5*abs(firstEdgeVector ^ secondEdgeVector);
+}
+
+std::vector<cg::half_edge*>& cg::tri_face::GetHalfEdgeVector()
+{
+	return halfEdge;
+}
+
+bool cg::tri_face::IsInside(vertex* V)
+{
+	for (size_t i = 0; i < 3; i++)
+	{
+		double crossProduct = cg::CrossProductByVertex2D(halfEdge[i]->GetStart(), halfEdge[i]->GetEnd(), V);
+		if (crossProduct <= 0.0) return false;
+	}
+	return true;
 }

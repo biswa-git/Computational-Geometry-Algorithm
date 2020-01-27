@@ -11,10 +11,15 @@ namespace cg
 		face(face const&) = delete;
 		face& operator=(face const&) = delete;
 		virtual double GetArea() = 0;
+		virtual void SetOrphanedEdgeRemoveFlag(bool);
+		virtual std::vector<half_edge*>& GetHalfEdgeVector() = 0;
+		virtual bool IsInside(vertex*) = 0;
 	protected:
 		virtual void CalculateArea() = 0;
 		static size_t count;
 		double area;
+		bool isOrphanedEdgeRemoveFlag;
+		std::vector<half_edge*> halfEdge;
 	};
 
 	class tri_face :public face
@@ -23,10 +28,11 @@ namespace cg
 		static tri_face* New(vertex*, vertex*, vertex*);
 		~tri_face();
 		virtual double GetArea();
+		virtual std::vector<half_edge*>& GetHalfEdgeVector();
+		virtual bool IsInside(vertex*);
 	protected:
 		virtual void CalculateArea();
 	private:
 		tri_face(vertex*, vertex*, vertex*);
-		half_edge* halfEdge[3];
 	};
 }

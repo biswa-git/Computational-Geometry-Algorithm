@@ -1,6 +1,6 @@
 #include "sweep_line.h"
 #include "convex_hull.h"
-#include "face.h"
+#include "face_node.h"
 #include "math.h"
 #define N 500
 #define RMAX 1.0
@@ -112,17 +112,17 @@ int main()
 	cg::face* tf4 = cg::tri_face::New(v[0], v[3], v[5]);
 */
 	v[0] = cg::vertex::New(0, 0);
-	v[1] = cg::vertex::New(11, 0);
-	v[2] = cg::vertex::New(5, 5);
-	v[3] = cg::vertex::New(5, -5);
+	v[1] = cg::vertex::New(10, 0);
+	v[2] = cg::vertex::New(0, 10);
+	v[3] = cg::vertex::New(2, 2);
+	v[4] = cg::vertex::New(2, 1);
+	v[5] = cg::vertex::New(5, 2);
 
-	cg::face* tf1 = cg::tri_face::New(v[0], v[1], v[2]);
-	cg::face* tf2 = cg::tri_face::New(v[0], v[1], v[3]);
-
-	cg::edge::Legalize(*v[0]->GetAssociatedEdge().begin());
-	std::cout << tf1->GetArea() << std::endl;
-	std::cout << tf2->GetArea() << std::endl;
-
+	auto f = cg::tri_face::New(v[0], v[1], v[2]);
+	auto fn = cg::face_node::New(f);
+	fn->CreateChild(v[3]);
+	fn->CreateChild(v[4]);
+	fn->CreateChild(v[5]);
 
 	return 0;
 }

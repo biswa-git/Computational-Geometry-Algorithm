@@ -11,6 +11,7 @@ source/math.cpp
 source/sweep_line.cpp
 source/vector.cpp
 source/vertex.cpp
+source/tri_flipper.cpp
 )
 
 install(TARGETS CGA DESTINATION ${CMAKE_SOURCE_DIR}/exe)

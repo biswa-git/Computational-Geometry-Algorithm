@@ -2,7 +2,7 @@
 #include "convex_hull.h"
 #include "face_node.h"
 #include "math.h"
-#define N 500
+#define N 60
 #define RMAX 1.0
 #define M_PI 3.14159265358979323846  /* pi */
 #include <ctime>
@@ -87,7 +87,6 @@ int main()
 		FREE_OBJ_MACRO(*it);
 	}
 	*/
-	cg::vertex* v[6];
 	/*
 	v[0] = cg::vertex::New(0 , 0 );
 	v[1] = cg::vertex::New(10, 0 );
@@ -111,18 +110,39 @@ int main()
 	cg::face* tf3 = cg::tri_face::New(v[1], v[4], v[3]);
 	cg::face* tf4 = cg::tri_face::New(v[0], v[3], v[5]);
 */
-	v[0] = cg::vertex::New(0, 0);
-	v[1] = cg::vertex::New(10, 0);
-	v[2] = cg::vertex::New(0, 10);
-	v[3] = cg::vertex::New(2, 2);
-	v[4] = cg::vertex::New(2, 1);
-	v[5] = cg::vertex::New(5, 2);
 
-	auto f = cg::tri_face::New(v[0], v[1], v[2]);
-	auto fn = cg::face_node::New(f);
-	fn->CreateChild(v[3]);
-	fn->CreateChild(v[4]);
-	fn->CreateChild(v[5]);
+
+	std::vector<cg::vertex*>V;
+	srand(static_cast<unsigned int>(time(static_cast<time_t>(0))));
+	for (auto it = 0; it < N; ++it)
+	{
+		double radius = RMAX * static_cast<double> (rand()) / static_cast<double>(RAND_MAX);
+		double theta = 2.0 * M_PI * static_cast<double> (rand()) / static_cast<double>(RAND_MAX);
+		V.emplace_back(cg::vertex::New(radius * cos(theta), radius * sin(theta)));
+	}
+	V[0]->Reassign(-1000, -1000, 0);
+	V[1]->Reassign( 1000, -1000, 0);
+	V[2]->Reassign(    0,  1000, 0);
+	//auto f = cg::tri_face::New(v[0], v[1], v[2]);
+	auto fn = cg::face_node::New(cg::tri_face::New(V[0], V[1], V[2]));
+	for (auto it = V.begin() + 3; it != V.end(); it++)
+	{
+		fn->CreateChild(*it);
+	}
+
+	std::ofstream file("../output/test.plt");
+	file << "TITLE = \"Triangulation data\"" << std::endl;
+	file << "VARIABLES = \"X\", \"Y\", \"Z\"" << std::endl;
+	file << "ZONE N =" << N << ", E = " << fn->GetCount() << ", DATAPACKING = POINT, ZONETYPE = FETRIANGLE" << std::endl;
+	//file << "SOLUTIONTIME =" << 1 << std::endl;
+	for (size_t i = 0; i < N; i++)
+	{
+		file << V[i]->GetXCoord() << " " << V[i]->GetYCoord() << " " << V[i]->GetZCoord() << std::endl;
+	}
+
+	fn->PrintNode(file);
+	file.close();
+
 
 	return 0;
 }

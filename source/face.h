@@ -1,8 +1,10 @@
 #pragma once
 #include "edge.h"
+#include "face_node.h"
 namespace cg
 {
 	class half_edge;
+	class face_node;
 	class face
 	{
 	public:
@@ -14,12 +16,15 @@ namespace cg
 		virtual void SetOrphanedEdgeRemoveFlag(bool);
 		virtual std::vector<half_edge*>& GetHalfEdgeVector() = 0;
 		virtual bool IsInside(vertex*) = 0;
+		virtual void SetFaceNode(face_node*);
+		virtual face_node* GetFaceNode();
 	protected:
 		virtual void CalculateArea() = 0;
 		static size_t count;
 		double area;
 		bool isOrphanedEdgeRemoveFlag;
 		std::vector<half_edge*> halfEdge;
+		face_node* faceNode;
 	};
 
 	class tri_face :public face

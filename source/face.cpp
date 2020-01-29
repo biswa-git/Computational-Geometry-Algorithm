@@ -2,7 +2,7 @@
 
 size_t cg::face::count = 0;
 
-cg::face::face() :area(0.0), isOrphanedEdgeRemoveFlag{ true }
+cg::face::face() :area(0.0), isOrphanedEdgeRemoveFlag{ true }, faceNode(nullptr)
 {
 }
 
@@ -13,6 +13,16 @@ cg::face::~face()
 void cg::face::SetOrphanedEdgeRemoveFlag(bool status)
 {
 	isOrphanedEdgeRemoveFlag = status;
+}
+
+void cg::face::SetFaceNode(face_node* FN)
+{
+	faceNode = FN;
+}
+
+cg::face_node* cg::face::GetFaceNode()
+{
+	return faceNode;
 }
 
 cg::tri_face* cg::tri_face::New(vertex* A, vertex* B, vertex* C)

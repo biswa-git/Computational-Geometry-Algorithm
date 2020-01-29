@@ -2,7 +2,7 @@
 
 size_t cg::vertex::count = 0;
 
-cg::vertex::vertex(const double& x, const double& y, const double& z):id(count++),xCoord(x), yCoord(y), zCoord(z)
+cg::vertex::vertex(const double& x, const double& y, const double& z):id(++count),xCoord(x), yCoord(y), zCoord(z)
 {
 }
 

@@ -17,10 +17,12 @@ namespace cg
 		void ActiveFlag(bool);
 		std::list<face_node*>& GetChildList();
 		void PrintNode(std::ofstream&);
+		void ResetIsVisitedStat();
 	private:
 		face_node(face*);
 		static size_t count;
 		bool isActive;
+		bool isVisited;
 		face* data;
 		std::list<face_node*> childList;
 		std::list<vertex*> faceVertList;

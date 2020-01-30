@@ -2,7 +2,7 @@
 #include "tri_flipper.h"
 size_t cg::face_node::count = 1;
 
-cg::face_node::face_node(face* F) :data(F), isActive(true)
+cg::face_node::face_node(face* F) :data(F), isActive(true), isVisited(false)
 {
 	if (F != nullptr) data->SetFaceNode(this);
 }
@@ -78,20 +78,29 @@ std::list<cg::face_node*>& cg::face_node::GetChildList()
 
 void cg::face_node::PrintNode(std::ofstream& file)
 {
-	if (isActive)
+	if (!isVisited)
 	{
-		auto halfEdgeVector = data->GetHalfEdgeVector();
-		for (auto it = halfEdgeVector.begin(); it != halfEdgeVector.end(); it++)
+		if (isActive)
 		{
-			file << (*it)->GetStart()->GetId() << " ";
+			isVisited = true;
+			auto halfEdgeVector = data->GetHalfEdgeVector();
+			for (auto it = halfEdgeVector.begin(); it != halfEdgeVector.end(); it++)
+			{
+				file << (*it)->GetStart()->GetId() << " ";
+			}
+			file << std::endl;
 		}
-		file << std::endl;
-	}
-	else
-	{
-		for (auto it = childList.begin(); it != childList.end(); it++)
+		else
 		{
-			(*it)->PrintNode(file);
+			for (auto it = childList.begin(); it != childList.end(); it++)
+			{
+				isVisited = true;
+				(*it)->PrintNode(file);
+			}
 		}
 	}
+}
+
+void cg::face_node::ResetIsVisitedStat()
+{
 }

@@ -2,7 +2,7 @@
 #include "convex_hull.h"
 #include "face_node.h"
 #include "math.h"
-#define N 60
+#define N 100000
 #define RMAX 1.0
 #define M_PI 3.14159265358979323846  /* pi */
 #include <ctime>
@@ -118,7 +118,7 @@ int main()
 	{
 		double radius = RMAX * static_cast<double> (rand()) / static_cast<double>(RAND_MAX);
 		double theta = 2.0 * M_PI * static_cast<double> (rand()) / static_cast<double>(RAND_MAX);
-		V.emplace_back(cg::vertex::New(radius * cos(theta), radius * sin(theta)));
+		V.emplace_back(cg::vertex::New(radius* cos(theta), radius* sin(theta)));
 	}
 	V[0]->Reassign(-1000, -1000, 0);
 	V[1]->Reassign( 1000, -1000, 0);
@@ -129,7 +129,7 @@ int main()
 	{
 		fn->CreateChild(*it);
 	}
-
+	std::cout << "meshing done!" << std::endl;
 	std::ofstream file("../output/test.plt");
 	file << "TITLE = \"Triangulation data\"" << std::endl;
 	file << "VARIABLES = \"X\", \"Y\", \"Z\"" << std::endl;

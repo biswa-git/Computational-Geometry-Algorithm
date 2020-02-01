@@ -123,7 +123,7 @@ int main()
 	V[0]->Reassign(-1000, -1000, 0);
 	V[1]->Reassign( 1000, -1000, 0);
 	V[2]->Reassign(    0,  1000, 0);
-	//auto f = cg::tri_face::New(v[0], v[1], v[2]);
+
 	auto fn = cg::face_node::New(cg::tri_face::New(V[0], V[1], V[2]));
 	for (auto it = V.begin() + 3; it != V.end(); it++)
 	{

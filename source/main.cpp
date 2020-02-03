@@ -2,7 +2,7 @@
 #include "convex_hull.h"
 #include "face_node.h"
 #include "math.h"
-#define N 100000
+#define N 200
 #define RMAX 1.0
 #define M_PI 3.14159265358979323846  /* pi */
 #include <ctime>

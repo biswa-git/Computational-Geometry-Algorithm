@@ -13,19 +13,19 @@ void cg::tri_flipper::flip(edge* E)
 
 		if (tmpFace[0] != nullptr && tmpFace[1] != nullptr)
 		{
-			/*------------------------------------------
-						   B
-						   /\
-						  /  \
-						 /    \
-						/--->--\
-					  C \--<---/ A
-						 \    /
-						  \  /
-						   \/
-						   D
-			--------------------------------------------*/
-			//NOW WE TEST WHTHER THE EDGE IS LEGAL OR NOT
+            /*------------------------------------------
+                           B
+                           /\
+                          /  \
+                         /    \
+                        /--->--\
+                      C \--<---/ A
+                         \    /
+                          \  /
+                           \/
+                           D
+            --------------------------------------------*/
+            //NOW WE TEST WHTHER THE EDGE IS LEGAL OR NOT
 			vertex* A = tempHalfEdge[0]->GetEnd();
 			vertex* B = tempHalfEdge[0]->GetNext()->GetEnd();
 			vertex* C = tempHalfEdge[0]->GetStart();
@@ -69,8 +69,8 @@ void cg::tri_flipper::flip(edge* E)
 
 				tmpFace[1]->GetFaceNode()->PushChild(faceNode[0]);
 				tmpFace[1]->GetFaceNode()->PushChild(faceNode[1]);
-				auto count = face_node::GetCount();
-				face_node::SetCount(count + 2);
+				//auto count = face_node::GetCount();
+				//face_node::SetCount(count + 2);
 				//FLIP EDGE AND LEGALISE OTHER EDGES 
 				//std::cout << "EDGE FLIP NEED TO BE PERFORMED" << std::endl;
 

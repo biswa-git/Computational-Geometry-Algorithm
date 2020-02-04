@@ -9,8 +9,10 @@ namespace cg
 	{
 	public:
 		static face_node* New(face*);
-		~face_node() = default;
+		~face_node();
 		static size_t GetCount();
+		face* GetData();
+		void FreeData();
 		static void SetCount(size_t);
 		void PushChild(face_node*);
 		void CreateChild(vertex*);
@@ -18,9 +20,11 @@ namespace cg
 		std::list<face_node*>& GetChildList();
 		void PrintNode(std::ofstream&);
 		void ResetIsVisitedStat();
+		void Clear();
 	private:
 		face_node(face*);
 		static size_t count;
+	    static std::stack<face_node*> faceNodeStack;
 		bool isActive;
 		bool isVisited;
 		face* data;

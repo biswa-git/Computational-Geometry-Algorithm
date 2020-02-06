@@ -1,8 +1,6 @@
 #include "face_node.h"
 #include "tri_flipper.h"
-
 size_t cg::face_node::count = 1;
-std::stack<cg::face_node*> cg::face_node::faceNodeStack;
 
 cg::face_node::face_node(face* F) :data(F), isActive(true), isVisited(false)
 {
@@ -14,24 +12,9 @@ cg::face_node* cg::face_node::New(face* F)
 	return new face_node(F);
 }
 
-cg::face_node::~face_node()
-{
-	FreeData();
-}
-
 size_t cg::face_node::GetCount()
 {
 	return count;
-}
-
-cg::face* cg::face_node::GetData()
-{
-	return data;
-}
-
-void cg::face_node::FreeData()
-{
-	FREE_OBJ_MACRO(data);
 }
 
 void cg::face_node::SetCount(size_t N)
@@ -57,10 +40,7 @@ void cg::face_node::CreateChild(vertex* V)
 			presentHalfEdge = presentHalfEdge->GetNext();
 			outerEdge.push_back(halfEdge[i]->GetParentEdge());
 		}
-
 		isActive = false;
-		data->SetOrphanedEdgeRemoveFlag(false);
-
 		for (size_t i = 0; i < halfEdge.size(); i++)
 		{
 			face* newFace = tri_face::New(halfEdge[i]->GetStart(), halfEdge[i]->GetEnd(), V);
@@ -123,23 +103,4 @@ void cg::face_node::PrintNode(std::ofstream& file)
 
 void cg::face_node::ResetIsVisitedStat()
 {
-}
-
-void cg::face_node::Clear()
-{
-	for (auto it = childList.begin(); it != childList.end(); ++it)
-	{
-		faceNodeStack.push(*it);
-	}
-	while (!faceNodeStack.empty())
-	{
-		auto presentFaceNode = faceNodeStack.top();
-		faceNodeStack.pop();
-		auto presentChildList = presentFaceNode->GetChildList();
-		for (auto it = presentChildList.begin(); it != presentChildList.end(); ++it)
-		{
-			faceNodeStack.push(*it);
-		}
-		FREE_OBJ_MACRO(presentFaceNode);
-	}
 }

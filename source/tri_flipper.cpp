@@ -48,11 +48,8 @@ void cg::tri_flipper::flip(edge* E)
 			double det = cg::math::det(M);
 			if (det > 0.0)
 			{
-				cg::face_node* tempFaceNode[2]{ tmpFace[0]->GetFaceNode(),tmpFace[1]->GetFaceNode() };
-				tempFaceNode[0]->ActiveFlag(false);
-				tempFaceNode[1]->ActiveFlag(false);
-				tempFaceNode[0]->GetData()->SetOrphanedEdgeRemoveFlag(false);
-				tempFaceNode[1]->GetData()->SetOrphanedEdgeRemoveFlag(false);
+				tmpFace[0]->GetFaceNode()->ActiveFlag(false);
+				tmpFace[1]->GetFaceNode()->ActiveFlag(false);
 
 				edgeSet.insert(tempHalfEdge[0]->GetNext()->GetParentEdge());
 				edgeSet.insert(tempHalfEdge[0]->GetNext()->GetNext()->GetParentEdge());
